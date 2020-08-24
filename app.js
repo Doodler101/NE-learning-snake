@@ -3,9 +3,9 @@ let ctx = c.getContext("2d");
 let death = false
 let showing = 0;
 let canShow = 10;
-let genSize = 2000;
+let genSize = 500;
 
-let batchSize = 100;
+let batchSize = 50;
 let score = 0;
 let dead = []
 for (let i = 0; i < batchSize; i++) {
@@ -495,7 +495,7 @@ function loop () {
 
 
         //draw apple
-        if (canShow + 1) {
+        if (showing < canShow + 1) {
             (function() {
                     ctx.fillStyle = "red"
                     ctx.fillRect(apple[s].x * 20 + 2, apple[s].y * 20 + 2, 18, 18);
@@ -661,7 +661,7 @@ function loop () {
                 snakes = [];
                 let highestScoreIndex;
                 bestSnake = [];
-                for (let i = 0; i < 10 ; i++) {
+                for (let i = 0; i < 47 ; i++) {
                     highestScoreIndex = snakesScore.indexOf(Math.max(...snakesScore))
                     bestSnake.push(parentSnakes[highestScoreIndex])
                     parentSnakes.splice(highestScoreIndex,1);
@@ -670,22 +670,22 @@ function loop () {
                 bestSnakeScore = Math.max(...snakesScore)
 
 
-                // recreate 10
-                for (let i = 0; i < 10; i++) {
+                // recreate 50
+                for (let i = 0; i < 47; i++) {
                     snakes.push(bestSnake[i]);
                 }
 
                 // mutate
-                for (let i = 0; i < 10; i++) {
-                    for (let j = 0; j < 94 - (6 * i); j++) {
+                for (let i = 0; i < 20; i++) {
+                    for (let j = 0; j < 20 - (i); j++) {
                         mutateSnake(bestSnake[i])
                     }
                 }
 
                 // cross breed
-                for (let i = 1; i < 11; i++) {
+                for (let i = 1; i < 10; i++) {
                     for (let j = 1; j < i; j++) {
-                        for (let k = 0; k < (i*j); k++) {
+                        for (let k = 0; k < (i*j/3.98); k++) {
                             breedSnake(bestSnake[10 - i],bestSnake[10 - j], (1 / ((i * j) + 1)) * (k + 1))
                         }
                     }
@@ -701,6 +701,7 @@ function loop () {
                 for (let i = 0; i < genSize; i++) {
                     snakesScore.push(averageFitness[generation - 2])
                 }
+
                 let string = ""
                 for (let i = averageFitness.length - 1; i > -1; i--) {
                     string += averageFitness[i]
