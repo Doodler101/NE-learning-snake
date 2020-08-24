@@ -3,7 +3,7 @@ let ctx = c.getContext("2d");
 let death = false
 let showing = 0;
 let canShow = 20;
-
+let genSize = 100;
 
 let batchSize = 50;
 let score = 0;
@@ -136,7 +136,7 @@ function getBaseLog (x,y) {
 
 let snakes = []
 let snakesScore = []
-for (let i = 0; i < 2000; i++) {
+for (let i = 0; i < genSize; i++) {
     snakesScore.push(0)
 }
 let snakeNumber = 1
@@ -178,7 +178,7 @@ function breedSnake (snake1, snake2, percentage) {
 
 
 
-for (let i = 0; i < 2000; i++) {
+for (let i = 0; i < genSize; i++) {
     let Keys = Object.keys(bestSnake)
     let values = Object.values(bestSnake)
     values = values.map((el) => {
@@ -653,7 +653,7 @@ function loop () {
             
 /////////////////////////////////////////////////////////////////////////////////////// reproduce ////////////////////////////////////////////////////////////////////
 
-            if (snakeNumber > 2000) {
+            if (snakeNumber > genSize) {
                 averageFitness[generation - 1] = Math.round(getAverageSum(snakesScore))
 
                 // set up best 10 snakes
@@ -698,7 +698,7 @@ function loop () {
                 snakesLeft = 50;
                 snakeNumber = 1;
                 snakesScore = [];
-                for (let i = 0; i < 2000; i++) {
+                for (let i = 0; i < genSize; i++) {
                     snakesScore.push(averageFitness[generation - 2])
                 }
                 let string = ""
