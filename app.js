@@ -2,10 +2,10 @@ let c = document.getElementById("myCanvas");
 let ctx = c.getContext("2d");
 let death = false
 let showing = 0;
-let canShow = 20;
-let genSize = 100;
+let canShow = 10;
+let genSize = 2000;
 
-let batchSize = 50;
+let batchSize = 100;
 let score = 0;
 let dead = []
 for (let i = 0; i < batchSize; i++) {
